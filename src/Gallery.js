@@ -15,7 +15,7 @@ class Shape extends Component {
       
       this.initializeOrbits = this.initializeOrbits.bind(this);
     }
-  componentDidMount() {
+    componentDidMount() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       this.scene = new THREE.Scene();
@@ -25,10 +25,11 @@ class Shape extends Component {
       this.renderer.setSize(width, height);
       this.mount.appendChild(this.renderer.domElement);
       this.initializeOrbits();
-      this.initializeCamera();
-
-      this.camera.lookAt(this.scene.position);	
-  
+      this.initializeCamera();  
+      
+      this.camera.position.set(10,50,514);
+      this.newZoom = 0;
+      this.controls.maxDistance = 1469;
       
       
       var geometry = new THREE.CubeGeometry( 500, 500, 500 );	
@@ -63,6 +64,11 @@ class Shape extends Component {
       this.camera.position.z = 400;
     }
   animate() {
+      var zoom = this.controls.target.distanceTo( this.controls.object.position )
+      if (this.newZoom != zoom){
+        console.log(zoom);
+        this.newZoom = zoom;
+      }
       this.frameId = window.requestAnimationFrame(this.animate);
       this.renderer.render(this.scene, this.camera);
     }
@@ -87,7 +93,6 @@ class Shape extends Component {
 export default function Gallery() {
     return(
         <div>
-            <h1>I work</h1>
             <Shape/>
         </div>
     )
