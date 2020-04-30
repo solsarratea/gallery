@@ -5,6 +5,8 @@ const OrbitControls = require('three-orbit-controls')(THREE)
 // to do:
 // 1. set up position distributon for individual galleries
 // 2. animate each piece within an individual gallery (customizing rooms)
+// 3. click to enter inside room
+// 4. (?) refactor into react hooks
 
 class Gallery extends Component {
   constructor (props) {
